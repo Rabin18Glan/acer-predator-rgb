@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+case ${1:-} in
+    -s) echo "${TEST_OS:-Linux}" ;;
+    -m) echo "${TEST_ARCH:-x86_64}" ;;
+    *) exit 2 ;;
+esac

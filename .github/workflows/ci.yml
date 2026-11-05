@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Install Rust build tools
+        run: |
+          rustup toolchain install stable --profile minimal --component rustfmt --component clippy
+          rustup default stable
+      - run: cargo fmt --all --check
+      - run: cargo clippy --locked --all-targets -- -D warnings
+      - run: cargo test --locked
+      - run: cargo build --locked
+      - name: Check installer and release scripts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck
+          for script in install.sh scripts/package-release.sh tests/install.sh tests/fixtures/curl tests/fixtures/uname; do bash -n "$script"; done
+          shellcheck install.sh scripts/package-release.sh tests/install.sh tests/fixtures/curl tests/fixtures/uname
+          bash tests/install.sh target/debug/acer-predator-rgb

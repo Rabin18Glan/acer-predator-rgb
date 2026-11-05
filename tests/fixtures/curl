@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Offline release server used only by tests/install.sh.
+set -euo pipefail
+url=''
+output=''
+while (($#)); do
+    case $1 in
+        --output) output=$2; shift 2 ;;
+        https://*) url=$1; shift ;;
+        *) shift ;;
+    esac
+done
+[[ -n $url && -n $output ]] || exit 2
+[[ ${TEST_DOWNLOAD_FAIL:-0} == 0 ]] || exit 22
+printf '%s\n' "$url" >> "${TEST_URL_LOG:?}"
+cp -- "${TEST_RELEASE_DIR:?}/${url##*/}" "$output"
