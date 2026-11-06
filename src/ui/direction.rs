@@ -22,7 +22,7 @@ impl DirectionPanel {
         let inner = block.inner(area);
         f.render_widget(block, area);
         if app.settings.effect == Effect::Static {
-            f.render_widget(Paragraph::new("Choose an animated effect to change its direction.\n4 Effect → Wave or Shifting makes direction easiest to see.")
+            f.render_widget(Paragraph::new("Choose an animated effect to change its direction.\n2 Effect → Wave or Shifting makes direction easiest to see.")
             .wrap(Wrap{trim:true}).style(Style::default().fg(MUTED)),inner);
             return;
         }

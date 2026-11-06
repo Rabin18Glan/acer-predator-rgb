@@ -101,3 +101,36 @@ fn tabs_and_keyboard_fit_standard_terminal() {
         }
     }
 }
+
+#[test]
+fn palette_grid_scales_and_clicks_apply_the_displayed_color_to_the_selected_zone() {
+    for (width, height) in [(76, 24), (120, 36)] {
+        let mut app = app();
+        app.zone = 2;
+        let original = app.settings.zones;
+        let mut ui = AppUi::new();
+        let mut terminal =
+            ratatui::Terminal::new(ratatui::backend::TestBackend::new(width, height)).unwrap();
+        terminal.draw(|frame| ui.draw(frame, &app)).unwrap();
+        let swatches: Vec<_> = ui
+            .hits
+            .iter()
+            .filter_map(|(rect, target)| match target {
+                HitTarget::Preset(color) => Some((*rect, *color)),
+                _ => None,
+            })
+            .collect();
+        assert!(swatches.len() >= 40);
+        assert!(
+            swatches
+                .iter()
+                .all(|(r, _)| r.right() <= width && r.bottom() <= height)
+        );
+        let (rect, color) = swatches.last().unwrap();
+        assert_eq!(*color, Rgb(255, 255, 255));
+        app.handle_action(ui.action_at(rect.x, rect.y).unwrap());
+        assert_eq!(app.settings.zones[1], *color);
+        assert_eq!(app.settings.zones[0], original[0]);
+        assert!(app.is_pending());
+    }
+}

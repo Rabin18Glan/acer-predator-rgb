@@ -2,18 +2,18 @@ use crate::model::{Direction, Effect, Rgb};
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Tab {
     Color,
+    Effect,
     Speed,
     Direction,
-    Effect,
 }
 impl Tab {
-    pub const ALL: [Self; 4] = [Self::Color, Self::Speed, Self::Direction, Self::Effect];
+    pub const ALL: [Self; 4] = [Self::Color, Self::Effect, Self::Speed, Self::Direction];
     pub fn index(self) -> usize {
         match self {
             Self::Color => 0,
-            Self::Speed => 1,
-            Self::Direction => 2,
-            Self::Effect => 3,
+            Self::Effect => 1,
+            Self::Speed => 2,
+            Self::Direction => 3,
         }
     }
 }

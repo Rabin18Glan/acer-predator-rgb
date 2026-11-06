@@ -31,7 +31,7 @@ If the command is not found, run `~/.local/bin/acer-predator-rgb` directly.
 
 | Key | Action |
 | --- | --- |
-| `1–4` or `Tab` | Switch between Color, Speed, Direction, and Effect |
+| `1–4` or `Tab` | Switch between Color, Effect, Speed, and Direction |
 | `Shift+1–4` | Select a keyboard zone |
 | `↑ / ↓` | Select a control or effect |
 | `← / →` | Adjust a value |

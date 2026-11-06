@@ -14,7 +14,7 @@ pub(super) struct TabsBar;
 
 impl TabsBar {
     pub(super) fn render(f: &mut Frame, area: Rect, app: &App, ui: &mut AppUi) {
-        let titles = ["1 Color selection", "2 Speed", "3 Direction", "4 Effect"];
+        let titles = ["1 Color selection", "2 Effect", "3 Speed", "4 Direction"];
         f.render_widget(
             Tabs::new(titles)
                 .select(app.tab.index())

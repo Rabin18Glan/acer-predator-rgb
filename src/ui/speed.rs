@@ -18,7 +18,7 @@ impl SpeedPanel {
         let inner = block.inner(area);
         f.render_widget(block, area);
         if app.settings.effect == Effect::Static {
-            f.render_widget(Paragraph::new("Choose an animated effect to adjust its speed.\n4 Effect → Breathing, Neon, Wave, Shifting or Zoom.")
+            f.render_widget(Paragraph::new("Choose an animated effect to adjust its speed.\n2 Effect → Breathing, Neon, Wave, Shifting or Zoom.")
             .wrap(Wrap{trim:true}).style(Style::default().fg(MUTED)),inner);
             return;
         }
