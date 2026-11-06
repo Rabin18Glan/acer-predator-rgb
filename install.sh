@@ -68,4 +68,4 @@ esac
 if [[ ! -c /dev/predator-kbd ]]; then
     echo 'Keyboard driver not detected at /dev/predator-kbd. The UI is installed, but lighting control needs the separately installed predator_kbd_rgb driver.'
 fi
-echo 'No Rust installation, kernel module changes, or startup services are required by this installer.'
+echo 'Ready !'
