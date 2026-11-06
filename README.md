@@ -43,6 +43,10 @@ If the command is not found, run `~/.local/bin/acer-predator-rgb` directly.
 
 You can also click tabs, keys, colors, and sliders.
 
+Target shows the selected zone in Static mode or the selected effect's name
+in animation mode. Breathing, Shifting, and Zoom accept a custom color;
+Wave and Neon generate their own colors.
+
 Choose **Static** for individual zone colors. Select **All zones** in the Target
 control to change the whole keyboard. Animated effects use a shared color or
 generate their own colors.
